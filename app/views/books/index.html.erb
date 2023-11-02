@@ -1,0 +1,25 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% @books.each do |book| %>
+
+
+<div>
+
+  <%= link_to "/users/#{book.user.id}" do %>
+    <%= image_tag book.user.get_profile_image(100,100) %>
+  <% end %>
+
+  <p><%= link_to book.title, book_path(book.id) %></p>
+  <p>説明：<%= book.body %></p>
+
+
+
+</div>
+<% end %>
