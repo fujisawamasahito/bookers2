@@ -15,102 +15,86 @@
 
 
   <body>
-     <div class="container-fluid">
-    <div class="header row px-3 py-4">
-      <div class="col-2">
-        <div class="logo">Bookers</div>
-      </div>
-      <div class="col-6 offset-4">
-        <div class="row">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <span>Bookers</span>
+          </a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
 
-          <% if user_signed_in? %>
-          <div class="col-3">
-           <%= link_to user_path(current_user.id) do %>
+             <% if user_signed_in? %>
+             <li> <%= link_to user_path(current_user.id) do %>
            <i class="fa-solid fa-house"></i>
             <%= 'Home' %>
-          <% end %>
-          </div>
-
-          <div class="col-3">
-             <%= link_to users_path do %>
+          <% end %></li>
+            <li> <%= link_to users_path do %>
           <i class="fa-solid fa-users"></i>
             <%= 'Users' %>
-          <% end %>
-          </div>
-
-          <div class="col-3">
-             <%= link_to books_path do %>
+          <% end %></li>
+            <li> <%= link_to books_path do %>
           <i class="fa-solid fa-book-open"></i>
             <%= 'Books' %>
-          <% end %>
-          </div>
-
-          <div class="col-3">
-              <%= link_to destroy_user_session_path, method: :delete do %>
+          <% end %></li>
+            <li> <%= link_to destroy_user_session_path, method: :delete do %>
          <i class="fa-solid fa-right-from-bracket"></i>
             <%= "Log out" %>
-          <% end %>
-          </div>
+          <% end %></li>
+
+
+
 
           <% else %>
 
-
-          <div class="col-3">
-           <%= link_to root_path do %>
+          <li> <%= link_to root_path do %>
            <i class="fa-solid fa-house"></i>
             <%= 'Home' %>
-          <% end %>
-          </div>
-
-          <div class="col-3">
-             <%= link_to about_path do %>
+          <% end %></li>
+          <li> <%= link_to about_path do %>
           <i class="fa-solid fa-link"></i>
             <%= 'About' %>
-          <% end %>
-          </div>
-
-          <div class="col-3">
-             <%= link_to new_user_registration_path do %>
+          <% end %></li>
+          <li>  <%= link_to new_user_registration_path do %>
           <i class="fa-solid fa-user-plus"></i>
             <%= 'Sign up' %>
-          <% end %>
-          </div>
-
-          <div class="col-3">
-              <%= link_to new_user_session_path do %>
+            <% end %></li>
+          <li> <%= link_to new_user_session_path do %>
          <i class="fa-solid fa-right-to-bracket"></i>
             <%= "Log in" %>
-          <% end %>
+          <% end %></li>
+
+           <% end %>
+
+
+
+
+
+            </ul>
           </div>
-
-
-        <% end %>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
 
-     <div class="main row justify-content-center">
-      <div class="sidebar col-md-3">
 
-      </div>
-      <div class="brank offset-md-1">
 
-      </div>
-      <!-- rowを行数分入れてもよかったが、受講生が理解しやすいように一番シンプルな形で書いた -->
-      <!-- row-colsクラスを指定すればもっとシンプルに書けるが受講生にとってどっちが良いか検討の必要あり -->
-      <div class="main-content col-md-8">
-        <div class="row row-cols-3 p-3">
 
-        </div>
-      </div>
-    </div>
 
-  </header>
+
 
   <% flash.each do |message_type, message| %>
       <div class="flash-message <%= message_type %>"><%= message %></div>
     <% end %>
     <%= yield %>
-    <footer>CopyRight Infratop.inc</footer>
+    <footer>
+      <div class="cotainer mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+
+      </footer>
   </body>
 </html>
