@@ -24,7 +24,7 @@
 
 
   <div class="row">
-     <%= link_to edit_user_path(current_user) do %>
+     <%= link_to edit_user_path(@book.user) do %>
    <button><i class="fa-solid fa-user-gear"></i></button>
     <% end %>
     </div>
@@ -49,7 +49,7 @@
 
 
   <div class="row">
-     <%= link_to user_path(current_user) do %>
+     <%= link_to edit_user_path(@book.user) do %>
    <button><i class="fa-solid fa-user-gear"></i></button>
     <% end %>
     </div>
@@ -85,12 +85,15 @@
 
 
 <div class="col-md-8 offset-md-1">
+
+
   <!--ここから置き換え-->
   <h2>Book detail</h2>
 
+
+<% if @book.user == current_user %>
+
   <table class=table>
-
-
     <tbody>
       <tr>
         <td>
@@ -107,11 +110,31 @@
           </td>
           <td><%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-success" %></td>
           <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, class: "btn btn-danger" ,"data-confirm" => "本当に削除しますか？" %></td>
-
       </tr>
-
     </tbody>
   </table>
+ <% else %>
+  <!--ここからcurrnentじゃない時-->
+  <table class=table>
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to user_path(@book.user) do %>
+          <%= image_tag @book.user.get_profile_image(100,100) %><br>
+            <%= @book.user.name %>
+          <% end %>
+        </td>
+         <td>
+         <p><%= link_to @book.title, book_path(@book.id) %></p>
+          </td>
+           <td>
+        <p><%= @book.body %></p>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+<% end %>
 <!--ここまで置き換え-->
 </div>
 

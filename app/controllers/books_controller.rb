@@ -6,15 +6,16 @@ class BooksController < ApplicationController
 
    # 投稿データの保存
   def create
-       @user= current_user
+    @user= current_user
+
       @new_book = Book.new(book_params)
       @books = Book.all
       @book = Book.new(book_params)
 
-    @new_book.user_id = current_user.id
-    if @new_book.save
+    @book.user_id = current_user.id
+    if @book.save
         flash[:notice] = "Book was successfully created."
-      redirect_to book_path(@new_book.id)
+      redirect_to book_path(@book.id)
     else
         flash.now[:notice] = "error"
       render :index
@@ -22,10 +23,10 @@ class BooksController < ApplicationController
   end
 
    def index
-       @new_book = Book.new(book_params)
-    @book = Book.new(book_params)
+    @book = Book.new
     @books = Book.all
     @user= current_user
+
 
   end
 
@@ -39,7 +40,12 @@ class BooksController < ApplicationController
   end
 
   def edit
+
     @book = Book.find(params[:id])
+
+    unless @book.user.id == current_user.id
+      redirect_to books_path
+    end
     @user= current_user
   end
 
@@ -67,3 +73,4 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 end
+
