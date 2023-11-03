@@ -7,19 +7,104 @@
   </ul>
 <% end %>
 
-<% @books.each do |book| %>
+<div class="main container ">
+  <div class="row">
 
+<div class="col-md-3">
 
-<div>
+     <div class=userinfo>
+       <h2>User info</h2>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <table class="table">
+  <tbody>
 
-  <%= link_to "/users/#{book.user.id}" do %>
-    <%= image_tag book.user.get_profile_image(100,100) %>
+  <tr>
+	  <th>name</th>
+	  <th><%= @user.name %></th>
+  </tr>
+  <tr>
+	  <th>introduction</th>
+	  <th><%= @user.introduction %></th>
+  </tr>
+</tbody>
+</table>
+
+  <% if @user == current_user %>
+  <div class="row">
+     <%= link_to edit_user_path(@user) do %>
+   <button><i class="fa-solid fa-user-gear"></i></button>
+    <% end %>
+    </div>
+
   <% end %>
 
-  <p><%= link_to book.title, book_path(book.id) %></p>
-  <p>説明：<%= book.body %></p>
+<!--userinfoの終了タグ-->
+     </div>
 
 
+<div　class=newbook>
+  <h2>New book</h2>
+  <%= form_with model: @book do |f| %>
 
-</div>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
 <% end %>
+</div>
+
+<!--colの終了-->
+
+
+<!--sidebar-->
+
+
+
+
+
+
+
+<div class="col-md-8 offset-md-1">
+  <!--ここから置き換え-->
+   <h2>Books</h2>
+
+  <table class="table table-hover table-inverse">
+
+    <thred>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <th colspan="3"></th>
+      </tr>
+    </thred>
+
+    <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <td><%= link_to "/users/#{book.user.id}" do %>
+        <%= image_tag book.user.get_profile_image(100,100) %>
+        <% end %></td>
+        <td>
+         <p><%= link_to book.title, book_path(book.id) %></p>
+          </td>
+        <td>
+        <p><%= book.body %></p>
+          </td>
+
+      </tr>
+       <% end %>
+    </tbody>
+  </table>
+
+
+
+<!--ここまで置き換え-->
+</div>
+
+<!--row-->
+</div>
+<!--main container-->
+</div>
+

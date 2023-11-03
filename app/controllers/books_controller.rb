@@ -20,12 +20,32 @@ class BooksController < ApplicationController
    def index
     @book = Book.new
     @books = Book.all
+    @user= current_user
 
   end
 
+
+
   def show
     @book =  Book.find(params[:id])
+    @user= current_user
 
+  end
+
+  def edit
+    @book = Book.find(params[:id])
+    @user= current_user
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      flash[:alert] = "successfully"
+    redirect_to book_path(@book.id)
+     else
+       flash.now[:alert] = "error"
+       render :edit
+     end
   end
 
   def destroy
