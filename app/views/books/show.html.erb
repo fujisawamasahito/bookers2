@@ -108,6 +108,24 @@
            <td>
         <p><%= @book.body %></p>
           </td>
+          <td>
+            <% if @book.favorited_by?(current_user) %>
+    <p>
+      <%= link_to book_favorite_path(@book), method: :delete do %>
+         <i class="fa-solid fa-heart" style="color: #ec0941;"></i><%= @book.favorites.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to book_favorite_path(@book), method: :post do %>
+         <i class="fa-solid fa-heart"></i><%= @book.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>
+          </td>
+          <td>
+            <p>コメント件数：<%= @book.book_comments.count %></p>
+          </td>
           <td><%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-success" %></td>
           <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, class: "btn btn-danger" ,"data-confirm" => "本当に削除しますか？" %></td>
       </tr>
@@ -130,11 +148,55 @@
            <td>
         <p><%= @book.body %></p>
           </td>
+          <td>
+            <% if @book.favorited_by?(current_user) %>
+    <p>
+      <%= link_to book_favorite_path(@book), method: :delete do %>
+        <i class="fa-solid fa-heart" style="color: #ec0941;"></i><%= @book.favorites.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to book_favorite_path(@book), method: :post do %>
+        <i class="fa-solid fa-heart"></i><%= @book.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>
+          </td>
+          <td>
+            <p>コメント数：<%= @book.book_comments.count %></p>
+          </td>
       </tr>
     </tbody>
   </table>
 
 <% end %>
+
+<div>
+  <% @book.book_comments.each do |book_comment| %>
+   <ul>
+    <%= link_to "/users/#{book_comment.user.id}" do %>
+
+        <%= image_tag book_comment.user.get_profile_image(100,100) %><br>
+      <%= book_comment.user.name %>
+        <% end %>
+
+    <%= book_comment.comment %>
+ <% if book_comment.user == current_user %>
+      <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), class: "btn btn-danger", method: :delete %>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@book, @book_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5' %>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>
+
+
 <!--ここまで置き換え-->
 </div>
 
@@ -142,5 +204,11 @@
 </div>
 <!--main container-->
 </div>
+
+
+
+
+
+
 
 

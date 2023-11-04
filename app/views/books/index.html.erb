@@ -92,6 +92,25 @@
         <td>
         <p><%= book.body %></p>
           </td>
+          <td>
+
+            <% if book.favorited_by?(current_user) %>
+    <p>
+      <%= link_to book_favorite_path(book), method: :delete do %>
+        <i class="fa-solid fa-heart" style="color: #ec0941;"></i><%= book.favorites.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to book_favorite_path(book), method: :post do %>
+        <i class="fa-solid fa-heart"></i><%= book.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>
+          </td>
+          <td>
+              <p><%=  "コメント数：#{book.book_comments.count} "%></p>
+          </td>
 
       </tr>
        <% end %>
@@ -107,4 +126,6 @@
 </div>
 <!--main container-->
 </div>
+
+
 
