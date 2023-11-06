@@ -10,7 +10,7 @@ class Book < ApplicationRecord
     length: { maximum: 200 }
 
     def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
-  end
+      favorites.exists?(user_id: user.id)
+    end
 
 end

@@ -31,8 +31,8 @@
 
   <% if @user == current_user %>
   <div class="row">
-     <%= link_to edit_user_path(@user) do %>
-   <button><i class="fa-solid fa-user-gear"></i></button>
+     <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
+   <i class="fas fa-user-cog"></i>
     <% end %>
     </div>
 
@@ -96,13 +96,13 @@
 
             <% if book.favorited_by?(current_user) %>
     <p>
-      <%= link_to book_favorite_path(book), method: :delete do %>
+      <%= link_to book_favorites_path(book), method: :delete do %>
         <i class="fa-solid fa-heart" style="color: #ec0941;"></i><%= book.favorites.count %>
       <% end %>
     </p>
     <% else %>
     <p>
-      <%= link_to book_favorite_path(book), method: :post do %>
+      <%= link_to book_favorites_path(book), method: :post do %>
         <i class="fa-solid fa-heart"></i><%= book.favorites.count %>
       <% end %>
     </p>

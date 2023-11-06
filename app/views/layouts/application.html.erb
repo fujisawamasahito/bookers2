@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <script src="https://kit.fontawesome.com/4146112a8b.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -47,21 +46,17 @@
 
           <% else %>
 
-          <li> <%= link_to root_path do %>
-           <i class="nav-link text-light fas fa-home"></i>
-            <%= 'Home' %>
+          <li> <%= link_to root_path, class: "nav-link text-light" do %>
+           <i class="fas fa-home"></i> Home
           <% end %></li>
-          <li> <%= link_to about_path do %>
-          <i class="nav-link text-light fas fa-link"></i>
-            <%= 'About' %>
+          <li> <%= link_to about_path, class: "nav-link text-light" do %>
+          <i class="fas fa-link"></i> About
           <% end %></li>
-          <li>  <%= link_to new_user_registration_path do %>
-          <i class="nav-link text-light fas fa-user-plus"></i>
-            <%= 'Sign up' %>
+          <li>  <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
+          <i class=" fas fa-user-plus"></i> Sign up
             <% end %></li>
-          <li> <%= link_to new_user_session_path do %>
-         <i class="nav-link text-light ffas fa-sign-in-alt"></i>
-            <%= "Log in" %>
+          <li> <%= link_to new_user_session_path, class: "nav-link text-light" do %>
+         <i class=" fas fa-sign-in-alt"></i> Log in
           <% end %></li>
 
            <% end %>
