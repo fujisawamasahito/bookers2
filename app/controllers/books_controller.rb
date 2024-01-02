@@ -22,13 +22,17 @@ class BooksController < ApplicationController
     end
   end
 
-   def index
-    @book = Book.new
-    @books = Book.all
-    @user= current_user
+
+    def index
+      @book = Book.new
+      @user= current_user
+      to = Time.current.at_end_of_day
+      from = (to - 6.day).at_beginning_of_day
+      @books = Book.includes(:favorites).sort_by { |book| -book.favorites.where(created_at: from...to).count }
+    end
 
 
-  end
+
 
 
 
@@ -68,7 +72,7 @@ class BooksController < ApplicationController
   end
 
     # 投稿データのストロングパラメータ
-  private
+private
 
   def book_params
     params.require(:book).permit(:title, :body)

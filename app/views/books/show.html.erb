@@ -127,7 +127,7 @@
             <p>コメント件数：<%= @book.book_comments.count %></p>
           </td>
           <td><%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-success" %></td>
-          <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, class: "btn btn-danger" ,"data-confirm" => "本当に削除しますか？" %></td>
+          <td><%= link_to 'Destroy', book_path(@book), method: :delete, class: "btn btn-danger" ,"data-confirm" => "本当に削除しますか？" %></td>
       </tr>
     </tbody>
   </table>
